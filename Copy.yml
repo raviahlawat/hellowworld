@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+name: copy-file-pod
+spec:
+containers:
+​name: file-copier
+image: busybox
+command: ["sh", "-c", "cp /source/file.txt /destination/file.txt && echo 'File copied successfully'"]
+volumeMounts:
+​name: source-volume
+mountPath: /source
+​name: destination-volume
+mountPath: /destination
+volumes:
+​name: source-volume
+hostPath:
+path: /path/to/source/directory
+type: Directory
+​name: destination-volume
+hostPath:
+path: /path/to/destination/directory
+type: DirectoryOrCreate
